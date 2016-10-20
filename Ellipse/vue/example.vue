@@ -1,13 +1,11 @@
 
 <template>
-    <div id="app">
+    <div id="example">
         <h1>{{ msg }}</h1>
     </div>
 </template>
 <script>
-    export default {
-        name: 'example'
-    }
+
 </script>
 <style>
   h1 {

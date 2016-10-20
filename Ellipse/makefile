@@ -4,26 +4,32 @@ GOBUILD=$(GOCMD) build
 GOCLEAN=$(GOCMD) clean
 GOGET=$(GOCMD) get
 
+WEBPACK=./node_modules/webpack/bin/webpack.js
+
 BINARY=Ellipse
 .DEFAULT_GOAL: $(BINARY)
 
 ALL_LIST = handlers
 STATIC_FOLDER = ./static
 DOC_FOLDER = $(STATIC_FOLDER)/doc
-FOLDERS_LIST = $(STATIC_FOLDER) $(DOC_FOLDER) ./vue ./img
+FOLDERS_LIST = $(STATIC_FOLDER) $(DOC_FOLDER) ./vue ./img ./js
 BUILD_LIST = $(foreach int, $(ALL_LIST), $(int).a)
+VUE_LIST = example
 
-$(BINARY): $(BUILD_LIST) generate_doc compile_vue process_img
+$(BINARY): $(BUILD_LIST) generate_doc process_img build.js
 	$(GOBUILD) -o $(BINARY)
 
 $(BUILD_LIST): %.a:
 	$(GOBUILD) $*
 
+build.js: compile_vue js/app.js
+		$(WEBPACK) js/app.js static/build.js
+
 generate_doc:
 	$(GODOC) handlers > $(DOC_FOLDER)/handlers
 
 compile_vue:
-	echo "compiling .vue"
+	vue-compiler --out js vue/*.vue
 
 process_img:
 	echo "processing img"
@@ -39,6 +45,8 @@ clean:
 	$(GOCLEAN)
 	$(GOCLEAN) $(ALL_LIST)
 	rm -rf $(DOC_FOLDER)/*
+	rm static/build.js
+	rm js/$(VUE_LIST).js
 
 extinct: clean
 	rm -rf ./bin ./pkg $(STATIC_FOLDER)/*
