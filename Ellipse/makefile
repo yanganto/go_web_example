@@ -35,7 +35,7 @@ process_img:
 	echo "processing img"
 
 
-.PHONY: init clean extinct
+.PHONY: init clean extinct help
 init:
 	$(GOGET) github.com/gorilla/mux
 	$(GOGET) github.com/urfave/negroni
@@ -54,3 +54,7 @@ extinct: clean
 	rm -rf ./src/github.com
 	rm -rf ./node_modules
 	mkdir -p $(DOC_FOLDER)
+
+help:
+	@echo Please install go and npm and set up GOPATH to Ellipse folder
+	@echo make init to init the environment
