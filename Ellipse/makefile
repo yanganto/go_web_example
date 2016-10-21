@@ -40,6 +40,7 @@ init:
 	$(GOGET) github.com/gorilla/mux
 	$(GOGET) github.com/urfave/negroni
 	mkdir -p $(FOLDERS_LIST)
+	npm install webpack vue-loader vueify
 
 clean:
 	$(GOCLEAN)
@@ -50,4 +51,6 @@ clean:
 
 extinct: clean
 	rm -rf ./bin ./pkg $(STATIC_FOLDER)/*
+	rm -rf ./src/github.com
+	rm -rf ./node_modules
 	mkdir -p $(DOC_FOLDER)
