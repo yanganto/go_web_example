@@ -5,7 +5,11 @@
     </div>
 </template>
 <script>
-
+module.exports = {
+  data: function(){
+    return { msg: 'A vue example'}
+  }
+}
 </script>
 <style>
   h1 {
