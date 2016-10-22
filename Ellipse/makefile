@@ -1,8 +1,11 @@
 GOCMD=go
 GODOC=godoc
 GOBUILD=$(GOCMD) build
+GOINSTALL=$(GOCMD) install
 GOCLEAN=$(GOCMD) clean
 GOGET=$(GOCMD) get
+GOOS=linux
+GOARCH=amd64
 
 WEBPACK=./node_modules/webpack/bin/webpack.js
 
@@ -11,17 +14,17 @@ BINARY=Ellipse
 
 ALL_LIST = handlers
 STATIC_FOLDER = ./static
-PUBLIC_FOLDER = ./public
+PUBLIC_FOLDER = public
 DOC_FOLDER = $(PUBLIC_FOLDER)/doc
-FOLDERS_LIST = $(DOC_FOLDER) ./$(STATIC_FOLDER)/vue ./$(STATIC_FOLDER)/img ./$(STATIC_FOLDER)/js
+FOLDERS_LIST = $(DOC_FOLDER) $(STATIC_FOLDER)/vue $(STATIC_FOLDER)/img $(STATIC_FOLDER)/js
 BUILD_LIST = $(foreach int, $(ALL_LIST), $(int).a)
 VUE_LIST = example
 
-$(BINARY): $(BUILD_LIST) generate_doc process_img $(PUBLIC_FOLDER)/build.js
+$(BINARY): pkg/$(GOOS)_$(GOARCH)/$(BUILD_LIST) generate_doc process_img $(PUBLIC_FOLDER)/build.js
 	$(GOBUILD) -o $(BINARY)
 
 $(BUILD_LIST): %.a:
-	$(GOBUILD) $*
+	$(GOINSTALL) $*
 
 $(PUBLIC_FOLDER)/build.js: compile_vue $(STATIC_FOLDER)/js/app.js
 		$(WEBPACK) $(STATIC_FOLDER)/js/app.js $(PUBLIC_FOLDER)/build.js
@@ -45,7 +48,7 @@ init:
 
 clean:
 	$(GOCLEAN)
-	$(GOCLEAN) $(ALL_LIST)
+	$(GOCLEAN) -i $(ALL_LIST)
 	rm $(PUBLIC_FOLDER)/build.js
 	rm -rf $(DOC_FOLDER)/*
 	rm $(STATIC_FOLDER)/js/$(VUE_LIST).js
