@@ -9,7 +9,7 @@ module.exports = {
   name: 'Example',
   data(){
     return { msg: 'A vue example',
-      clickFunc: function(){
+      clickFunc(){
         console.log(this);
         this.msg = 'you click me >///<';
       }

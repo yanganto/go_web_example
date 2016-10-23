@@ -7,7 +7,7 @@ GOGET=$(GOCMD) get
 GOOS=linux
 GOARCH=amd64
 
-WEBPACK=./node_modules/webpack/bin/webpack.js
+WEBPACK=node_modules/webpack/bin/webpack.js
 
 BINARY=Ellipse
 .DEFAULT_GOAL: $(BINARY)
@@ -17,17 +17,17 @@ STATIC_FOLDER = ./static
 PUBLIC_FOLDER = public
 DOC_FOLDER = $(PUBLIC_FOLDER)/doc
 FOLDERS_LIST = $(DOC_FOLDER) $(STATIC_FOLDER)/vue $(STATIC_FOLDER)/img $(STATIC_FOLDER)/js
-BUILD_LIST = $(foreach int, $(ALL_LIST), $(int).a)
+BUILD_LIST = $(foreach int, $(ALL_LIST), pkg/$(GOOS)_$(GOARCH)/$(int).a)
 VUE_LIST = example
 
-$(BINARY): pkg/$(GOOS)_$(GOARCH)/$(BUILD_LIST) generate_doc process_img $(PUBLIC_FOLDER)/build.js
+$(BINARY): $(BUILD_LIST) generate_doc process_img $(PUBLIC_FOLDER)/build.js
 	$(GOBUILD) -o $(BINARY)
 
 $(BUILD_LIST): %.a:
-	$(GOINSTALL) $*
+	$(GOINSTALL) $(notdir $*)
 
 $(PUBLIC_FOLDER)/build.js: compile_vue $(STATIC_FOLDER)/js/app.js
-		$(WEBPACK) $(STATIC_FOLDER)/js/app.js $(PUBLIC_FOLDER)/build.js
+	$(WEBPACK) $(STATIC_FOLDER)/js/app.js $(PUBLIC_FOLDER)/build.js
 
 generate_doc:
 	$(GODOC) handlers > $(DOC_FOLDER)/handlers
@@ -36,7 +36,7 @@ compile_vue:
 	vue-compiler --out $(STATIC_FOLDER)/js $(STATIC_FOLDER)/vue/*.vue
 
 process_img:
-	echo "processing img"
+	@echo process image here
 
 
 .PHONY: init clean extinct help
