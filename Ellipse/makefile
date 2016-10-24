@@ -13,10 +13,11 @@ BINARY=Ellipse
 .DEFAULT_GOAL: $(BINARY)
 
 ALL_LIST = handlers
-STATIC_FOLDER = ./static
+STATIC_FOLDER = static
+TEMPLATE_FOLDER = templates
 PUBLIC_FOLDER = public
 DOC_FOLDER = $(PUBLIC_FOLDER)/doc
-FOLDERS_LIST = $(DOC_FOLDER) $(STATIC_FOLDER)/vue $(STATIC_FOLDER)/img $(STATIC_FOLDER)/js
+FOLDERS_LIST = $(TEMPLATE_FOLDER) $(DOC_FOLDER) $(STATIC_FOLDER)/vue $(STATIC_FOLDER)/img $(STATIC_FOLDER)/js
 BUILD_LIST = $(foreach int, $(ALL_LIST), pkg/$(GOOS)_$(GOARCH)/$(int).a)
 VUE_LIST = example
 
@@ -43,6 +44,7 @@ process_img:
 init:
 	$(GOGET) github.com/gorilla/mux
 	$(GOGET) github.com/urfave/negroni
+	$(GOGET) github.com/unrolled/render
 	mkdir -p $(FOLDERS_LIST)
 	npm install webpack vue-loader vueify
 
@@ -54,9 +56,9 @@ clean:
 	rm $(STATIC_FOLDER)/js/$(VUE_LIST).js
 
 extinct: clean
-	rm -rf ./bin ./pkg $(PUBLIC_FOLDER)/*
-	rm -rf ./src/github.com
-	rm -rf ./node_modules
+	rm -rf bin pkg $(PUBLIC_FOLDER)/*
+	rm -rf src/github.com
+	rm -rf node_modules
 	mkdir -p $(DOC_FOLDER)
 
 help:

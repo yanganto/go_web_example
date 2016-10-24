@@ -5,6 +5,7 @@ import (
 	"net/http"
 
 	"github.com/gorilla/mux"
+	"github.com/unrolled/render"
 )
 
 func SetRouter(r *mux.Router) {
@@ -16,7 +17,9 @@ func SetRouter(r *mux.Router) {
 // URL /
 // get the home page
 func HomeHandler(w http.ResponseWriter, req *http.Request) {
-	fmt.Fprintf(w, "<!doctype html><html><head><title>Example</title></head><body><div id='app'></div><script src='/build.js'></script></body></html>")
+
+	r := render.New()
+	r.HTML(w, http.StatusOK, "base", struct{ A, B string }{"foo", "bar"})
 }
 func notFoundHandler(w http.ResponseWriter, req *http.Request) {
 	fmt.Fprintf(w, "Some thing not found")
