@@ -31,7 +31,7 @@ $(PUBLIC_FOLDER)/build.js: compile_vue $(STATIC_FOLDER)/js/app.js
 	$(WEBPACK) $(STATIC_FOLDER)/js/app.js $(PUBLIC_FOLDER)/build.js
 
 generate_doc:
-	$(GODOC) handlers > $(DOC_FOLDER)/handlers
+	$(GODOC) -html handlers > $(DOC_FOLDER)/handlers
 
 compile_vue:
 	vue-compiler --out $(STATIC_FOLDER)/js $(STATIC_FOLDER)/vue/*.vue
@@ -40,7 +40,7 @@ process_img:
 	@echo process image here
 
 
-.PHONY: init clean extinct help
+.PHONY: init clean help
 init:
 	$(GOGET) github.com/gorilla/mux
 	$(GOGET) github.com/urfave/negroni
@@ -55,7 +55,7 @@ clean:
 	rm -rf $(DOC_FOLDER)/*
 	rm $(STATIC_FOLDER)/js/$(VUE_LIST).js
 
-extinct: clean
+distclean: clean
 	rm -rf bin pkg $(PUBLIC_FOLDER)/*
 	rm -rf src/github.com
 	rm -rf node_modules
