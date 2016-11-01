@@ -8,7 +8,7 @@ let webpackHotMiddleware = require('webpack-hot-middleware');
 let bodyParser = require('body-parser');
 
 const PORT = process.env.PORT || 3000;
-let config = require('./webpack.config.dev.js');
+let config = require('./webpack.config.js');
 let compiler = webpack(config);
 let server = express();
 let router = express.Router();

@@ -27,14 +27,14 @@ $(BINARY): $(BUILD_LIST) generate_doc process_img $(PUBLIC_FOLDER)/build.js
 $(BUILD_LIST): %.a:
 	$(GOINSTALL) $(notdir $*)
 
-$(PUBLIC_FOLDER)/build.js: compile_vue $(STATIC_FOLDER)/js/app.js
-	$(WEBPACK) $(STATIC_FOLDER)/js/app.js $(PUBLIC_FOLDER)/build.js
+$(PUBLIC_FOLDER)/build.js: $(STATIC_FOLDER)/js/app.js
+	$(WEBPACK)
 
 generate_doc:
 	$(GODOC) -html handlers > $(DOC_FOLDER)/handlers
 
 compile_vue:
-	vue-compiler --out $(STATIC_FOLDER)/js $(STATIC_FOLDER)/vue/*.vue
+	vue-compiler --out $(STATIC_FOLDER)/js $(STATIC_FOLDER)/js/vue/*.vue
 
 process_img:
 	@echo process image here
