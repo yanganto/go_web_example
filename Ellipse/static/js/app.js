@@ -1,5 +1,5 @@
 var Vue = require('./vue.js')
-var Example = require('./example.js')
+var Example = require('./vue/example.vue')
 // Example.data = function(){
 //     return {msg: "A Example Vue app"}
 // }
