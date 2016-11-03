@@ -6,10 +6,10 @@ module.exports = function (config) {
     browsers: ['Chrome'],
     frameworks: ['jasmine'],
     // this is the entry file for all our tests.
-    files: ['static/js/test/example.js'],
+    files: ['static/js/test/test_runner.js'],
     // we will pass the entry file to webpack for bundling.
     preprocessors: {
-      'static/js/test/example.js': ['webpack']
+      'static/js/test/test_runner.js': ['webpack']
     },
     // use the webpack config
     webpack: webpackConfig,
