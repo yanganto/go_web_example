@@ -8,10 +8,10 @@
 module.exports = {
   name: 'Example',
   data(){
-    return { msg: 'A vue example',
+    return { msg: 'A vue example', times: 0,
       clickFunc(){
-        console.log(this);
-        this.msg = 'you click me >///<';
+        this.times += 1;
+        this.msg = 'you click me ' + this.times + ' times >///<';
       }
     }
   }
