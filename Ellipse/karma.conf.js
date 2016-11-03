@@ -2,7 +2,8 @@ var webpackConfig = require('./webpack.config.js')
 delete webpackConfig.entry
 module.exports = function (config) {
   config.set({
-    browsers: ['PhantomJS'],
+    //browsers: ['PhantomJS'],
+    browsers: ['Chrome'],
     frameworks: ['jasmine'],
     // this is the entry file for all our tests.
     files: ['static/js/test/example.js'],
