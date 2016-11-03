@@ -3,7 +3,7 @@ var webpack = require('webpack')
 
 
 module.exports = {
-  entry: path.resolve(__dirname, 'static/js/app.js'),
+  entry:  path.resolve(__dirname, 'static/js/app.js'),
   output: {
     path: path.resolve(__dirname, './public'),
     publicPath: '/',

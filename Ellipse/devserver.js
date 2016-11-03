@@ -58,6 +58,7 @@ server.use(webpackHotMiddleware(compiler));
 server.use(bodyParser.urlencoded({ extended: true }));
 server.use(bodyParser.json());
 server.use('/', express.static('public'));
+server.use('/', express.static('mock'));
 server.use(router);
 
 server.listen(PORT, function (err) {

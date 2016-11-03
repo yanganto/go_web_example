@@ -45,7 +45,6 @@ clean:
 	$(GOCLEAN) -i $(ALL_LIST)
 	rm $(PUBLIC_FOLDER)/build.js
 	rm -rf $(DOC_FOLDER)/*
-	rm $(STATIC_FOLDER)/js/$(VUE_LIST).js
 
 distclean: clean
 	rm -rf bin pkg $(PUBLIC_FOLDER)/*
