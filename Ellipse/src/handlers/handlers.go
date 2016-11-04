@@ -19,7 +19,7 @@ func SetRouter(r *mux.Router) {
 func HomeHandler(w http.ResponseWriter, req *http.Request) {
 
 	r := render.New()
-	r.HTML(w, http.StatusOK, "base", struct{ A, B string }{"foo", "bar"})
+	r.HTML(w, http.StatusOK, "base", "")
 }
 func notFoundHandler(w http.ResponseWriter, req *http.Request) {
 	fmt.Fprintf(w, "Some thing not found")

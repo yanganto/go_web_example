@@ -1,12 +1,14 @@
 package handlers
 
 import (
-	"fmt"
 	"net/http"
+
+	"github.com/unrolled/render"
 )
 
 // URL /other
 // example for other
 func otherHandler(w http.ResponseWriter, req *http.Request) {
-	fmt.Fprintf(w, "the other Handler")
+	r := render.New()
+	r.JSON(w, http.StatusOK, map[string]string{"key": "RealValue"})
 }
