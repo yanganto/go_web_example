@@ -1,16 +1,23 @@
-// var Vue = require('../vue.js')
-// var Example = require('../vue/example.vue')
-// // Here are some Jasmine 2.0 tests, though you can
-// // use any test runner / assertion library combo you prefer
-// describe('Example', () => {
-//   // Inspect the raw component options
-//   it('has a click function', () => {
-//     expect(typeof MyComponent.clickFunc).toBe('function')
-//   })
+
+// require vue from js file not npm module for testing
+var Vue = require('../vue.js')
+// var Vuex = require('vuex')
+// Vue.use(Vuex)
+
+var ExampleComponent = require('../vue/example.vue')
+
+// const state = { }
+//
+// export const mutations = {
+//   showBackendValue: function(state, a_text){
+//       state.ajax_data = "Fake data"
+//   }
+// }
+// export default new Vuex.Store({
+//   state,
+//   mutations
 // })
 
-var Vue = require('../vue.js')
-var ExampleComponent = require('../vue/example.vue')
 
 describe('example.vue', function () {
 
@@ -25,24 +32,36 @@ describe('example.vue', function () {
       template: '<div><test></test></div>',
       components: {
         'test': ExampleComponent
-      }
+      },
     }).$mount()
+    console.log(vm.$el)
     expect(vm.$el.querySelector('h1').textContent).toBe('A vue example')
   })
 
   // asserting rendered result by actually rendering the component
   it('check clikc function', function () {
     var vm = new Vue(
-        ExampleComponent
+        ExampleComponent,
+        store
     ).$mount()
-    // vm.$el.querySelector('h1').click()
+    // test click by clicking element
+    vm.$el.querySelector('h1').click()
+
+    // test click by sending event
     // var clickEvent = new MouseEvent("click", {
     //     "view": window,
     //     "bubbles": true,
     //     "cancelable": false
     // });
     // vm.$el.querySelector('h1').dispatchEvent(clickEvent);
-    vm.clickFunc();
+
+    // test click by js function
+    // vm.clickFunc();
+
     expect(vm.times).toBe(1);
+    expect(vm.msg).toBe('you click me 1 times >///<');
+
+    // the re-render may not so quick
+    //expect(vm.$el.querySelector('h1').innerHTML).toBe('you click me 1 times >///<')
   })
 })

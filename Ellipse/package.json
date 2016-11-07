@@ -27,6 +27,7 @@
     "karma-jasmine": "^1.0.2",
     "karma-webpack": "^1.8.0",
     "karma-chrome-launcher": "^2.0.0",
-    "vue": "^2.0.3"
+    "vue": "^2.0.3",
+    "vuex": "^2.0.0"
   }
 }

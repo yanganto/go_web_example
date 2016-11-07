@@ -38,7 +38,7 @@ init:
 	$(GOGET) github.com/urfave/negroni
 	$(GOGET) github.com/unrolled/render
 	mkdir -p $(FOLDERS_LIST)
-	npm install webpack vue-loader vueify
+	npm install 
 
 clean:
 	$(GOCLEAN)
