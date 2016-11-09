@@ -1,8 +1,8 @@
 
 // require vue from js file not npm module for testing
-var Vue = require('../vue.js')
-// var Vuex = require('vuex')
-// Vue.use(Vuex)
+var Vue = require('vue')
+var Vuex = require('vuex')
+Vue.use(Vuex)
 
 var ExampleComponent = require('../vue/example.vue')
 
@@ -17,6 +17,11 @@ var ExampleComponent = require('../vue/example.vue')
 //   state,
 //   mutations
 // })
+const store = new Vuex.Store({
+  state: {
+    ajax_data: "Fake Data"
+  }
+})
 
 
 describe('example.vue', function () {
@@ -30,6 +35,7 @@ describe('example.vue', function () {
   it('should render correct message', function () {
     var vm = new Vue({
       template: '<div><test></test></div>',
+      store,
       components: {
         'test': ExampleComponent
       },
