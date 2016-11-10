@@ -1,6 +1,6 @@
 
 // require vue from js file not npm module for testing
-var Vue = require('vue')
+var Vue = require('../vue.js')
 var Vuex = require('vuex')
 Vue.use(Vuex)
 
@@ -23,6 +23,14 @@ const store = new Vuex.Store({
   }
 })
 
+function logattr(o) {
+  console.log(o)
+  console.log("==========")
+  for(var a in o){
+    console.log(a)
+  }
+  console.log("==========")
+}
 
 describe('example.vue', function () {
 
@@ -40,34 +48,23 @@ describe('example.vue', function () {
         'test': ExampleComponent
       },
     }).$mount()
-    console.log(vm.$el)
+    // console.log(vm.$el)
     expect(vm.$el.querySelector('h1').textContent).toBe('A vue example')
   })
 
   // asserting rendered result by actually rendering the component
   it('check clikc function', function () {
-    var vm = new Vue(
-        ExampleComponent,
-        store
-    ).$mount()
+    var vm = new Vue({
+      template: '<div><test></test></div>',
+      store,
+      components: {
+        'test': ExampleComponent
+      },
+    }).$mount()
     // test click by clicking element
     vm.$el.querySelector('h1').click()
 
-    // test click by sending event
-    // var clickEvent = new MouseEvent("click", {
-    //     "view": window,
-    //     "bubbles": true,
-    //     "cancelable": false
-    // });
-    // vm.$el.querySelector('h1').dispatchEvent(clickEvent);
-
-    // test click by js function
-    // vm.clickFunc();
-
-    expect(vm.times).toBe(1);
-    expect(vm.msg).toBe('you click me 1 times >///<');
-
-    // the re-render may not so quick
-    //expect(vm.$el.querySelector('h1').innerHTML).toBe('you click me 1 times >///<')
+    expect(vm.$children[0].times).toBe(1);
+    expect(vm.$children[0].msg).toBe('you click me 1 times >///<');
   })
 })

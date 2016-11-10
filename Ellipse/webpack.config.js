@@ -16,19 +16,19 @@ module.exports = {
         loader: 'vue',
         options: {
           // vue-loader options go here
-        }
-      // },
-      // {
-      //   test: /\.js$/,
-      //   loader: 'babel',
-      //   exclude: /node_modules/
+      }
+    },
+      {
+        test: /\.js$/,
+        loader: 'babel',
+        exclude: /node_modules/
       // },
       // {
       //   test: /\.(png|jpg|gif|svg)$/,
       //   loader: 'file',
       //   options: {
       //     name: '[name].[ext]?[hash]'
-      //   }
+        // }
       }
     ]
   },
