@@ -4,7 +4,7 @@
   "author": "poan_yang <poan_yang@trendmicro.com>",
   "private": true,
   "scripts": {
-    "dev": "cross-env NODE_ENV=development webpack-dev-server --open --inline --hot",
+    "dev": "cross-env NODE_ENV=dev node devserver.js",
     "build": "cross-env NODE_ENV=production webpack --progress --hide-modules",
     "test": "karma start karma.conf.js"
   },
