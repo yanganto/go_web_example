@@ -33,9 +33,9 @@ module.exports = {
     ]
   },
   resolve: {
-    // alias: {
-    //   'vue$': 'vue/dist/vue'
-    // }
+    alias: {
+       '$vue':  path.resolve(__dirname, './static/vue')
+    }
   },
   devServer: {
     historyApiFallback: true,

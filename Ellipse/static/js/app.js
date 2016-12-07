@@ -1,7 +1,7 @@
 var Vue = require('vue')
 var Vuex = require('vuex')
 Vue.use(Vuex)
-var Example = require('./vue/example.vue')
+var Example = require('$vue/example.vue')
 
 const store = new Vuex.Store({
   state: {
